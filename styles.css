@@ -1,0 +1,27 @@
+.add-book {
+    height: 50px;
+    width: 150px;
+    margin: 10px 0px 10px 50px;
+    outline: none;
+}
+
+.remove-book {
+    margin-top: 18px;
+    height: 30px;
+}
+
+.library {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.book-card {
+    border: 1px solid black;
+    border-radius: 15px;
+    width: 300px;
+    height: 250px;
+    text-align: center;
+    margin: 10px;
+    background-color: rgba(150, 150, 150, 0.3)
+}
