@@ -21,11 +21,52 @@ Book.prototype.toggleIsRead = function() {
 }
 
 function addBookToLibrary() {
+    createForm();
+    /*
     const title = prompt("Enter the name of the book: ");
     const author = prompt("Enter the author of the book: ");
     const pages = prompt("Enter the number of pages in the book: ");
     const isRead = prompt("Enter whether you read the book or not: ");
     myLibrary.push(new Book(title, author, pages, isRead));
+    */
+}
+
+function createForm() {
+    const main = document.querySelector(".main");
+    const form = document.createElement("form");
+    form.classList.add('book-form');
+    form.innerHTML = `
+    <label for="add-book-title">Title: </label>
+    <input id="add-book-title" type="text" name="add-book-title">
+    <label for="add-book-author">Author: </label>
+    <input id="add-book-author" type="text">
+    <label for="add-book-pages">Number of Pages: </label>
+    <input id="add-book-pages" type="text">
+    <label>Have you read this book?</label>
+    <div class="add-book-read">
+        <input id="add-book-read-yes" type="radio" name="read" value="yes">
+        <label for="add-book-read-yes">Yes</label>
+        <input id="add-book-pages-no" type="radio" name="read" value="no">
+        <label for="add-book-read-no">No</label> 
+    </div>
+    <input id="submit-book" type="submit" value="Add Book">
+    `;
+    const submit = form.querySelector("#submit-book");
+    main.appendChild(form);
+    submit.addEventListener("click", () => {
+        const title = form.querySelector("#add-book-title").value;
+        const author = form.querySelector("#add-book-author").value;
+        const pages = form.querySelector("#add-book-pages").value;
+        const isReadChoice = form.querySelector('input[name="read"]:checked').value;
+        let isRead = false;
+        if (isReadChoice === "yes") {
+            isRead = true;
+        }
+        myLibrary.push(new Book(title, author, pages, isRead));
+        console.log(myLibrary);
+        main.removeChild(form);
+        render();
+    });
 }
 
 
