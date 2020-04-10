@@ -49,12 +49,12 @@ function createBookCard(book, id) {
     let bookcard = document.createElement("div");
     bookcard.classList.add("book-card");
     bookcard.id = id;
-    addTextElements(book, bookcard);
-    addRemoveButton(bookcard);
+    addTextElements(bookcard, book);
+    addButtonRow(bookcard, book);
     return bookcard;
 }
 
-function addTextElements(book, card) {
+function addTextElements(card, book) {
     const title = document.createElement("h3");
     title.textContent = book.title;
     const author = document.createElement("h3");
@@ -69,15 +69,33 @@ function addTextElements(book, card) {
     card.appendChild(isRead);
 }
 
-function addRemoveButton(card) {
+function addButtonRow(card, book) {
+    const buttonRow = document.createElement("div");
+    addRemoveButton(buttonRow);
+    addReadButton(buttonRow, book);
+    card.appendChild(buttonRow);
+}
+
+function addRemoveButton(element) {
     const deleteButton = document.createElement("button");
-    deleteButton.classList.add("remove-book");
+    deleteButton.classList.add("card-button");
     deleteButton.textContent = "Remove Book";
     deleteButton.addEventListener("click", () => {
-        myLibrary.splice(card.id, 1);
+        myLibrary.splice(element.id, 1);
         render();
     });
-    card.appendChild(deleteButton);
+    element.appendChild(deleteButton);
+}
+
+function addReadButton(element, book) {
+    const readButton = document.createElement("button");
+    readButton.classList.add("card-button");
+    readButton.textContent = "Mark as Read";
+    readButton.addEventListener("click", () => {
+        book.toggleIsRead();
+        render();
+    });
+    element.appendChild(readButton);
 }
 
 render();
