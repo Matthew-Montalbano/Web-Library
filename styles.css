@@ -5,7 +5,7 @@ body {
 }
 
 header {
-    text-align: center;
+    display: flex;
     font-size: 35px;
     /* background-color: rgba(255, 145, 55, 1); */
     background-color: #e7c4a8;
@@ -17,21 +17,24 @@ header {
 }
 
 h1 {
-    margin: 0px;
+    margin: 0px 0px 0px 50px;
 }
 
 .main {
     display: flex;
     flex-direction: column;
+    margin: 20px;
 }
 
 .add-book {
-    font-size: 1.5em;
+    position: absolute;
+    right: 0;
+    font-size: .5em;
     border: 1px solid black;
     border-radius: 30px;
     height: 50px;
-    width: 300px;
-    margin: 30px;
+    width: 200px;
+    margin-right: 50px;
     outline: none;
     align-self: center;
 }
