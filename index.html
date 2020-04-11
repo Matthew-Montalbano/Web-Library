@@ -9,6 +9,22 @@
             <button class="add-book">Add New Book</button>
         </header>
         <div class="main">
+            <form class="book-form">
+                <label for="add-book-title">Title: </label>
+                <input id="add-book-title" type="text" name="add-book-title">
+                <label for="add-book-author">Author: </label>
+                <input id="add-book-author" type="text">
+                <label for="add-book-pages">Number of Pages: </label>
+                <input id="add-book-pages" type="text">
+                <label>Have you read this book?</label>
+                <div class="add-book-read">
+                    <input id="add-book-read-yes" type="radio" name="read" value="yes">
+                    <label for="add-book-read-yes">Yes</label>
+                    <input id="add-book-pages-no" type="radio" name="read" value="no">
+                    <label for="add-book-read-no">No</label> 
+                </div>
+                <button id="submit-book" type="button" value="Add Book">Add New Book</button>
+            </form>
             <div class="library">
                 <div class="book-card">
                     <h3 class="title">Harry Potter</h3>

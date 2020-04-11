@@ -20,53 +20,38 @@ Book.prototype.toggleIsRead = function() {
     this.isRead = !this.isRead;
 }
 
+/*
 function addBookToLibrary() {
     createForm();
-    /*
     const title = prompt("Enter the name of the book: ");
     const author = prompt("Enter the author of the book: ");
     const pages = prompt("Enter the number of pages in the book: ");
     const isRead = prompt("Enter whether you read the book or not: ");
     myLibrary.push(new Book(title, author, pages, isRead));
-    */
+
+}*/
+
+function addBookToLibrary() {
+    const title = document.querySelector("#add-book-title").value;
+    const author = document.querySelector("#add-book-author").value;
+    const pages = document.querySelector("#add-book-pages").value;
+    const isReadChoice = document.querySelector('input[name="read"]:checked').value;
+    let isRead = false;
+    if (isReadChoice === "yes") {
+        isRead = true;
+    }
+    myLibrary.push(new Book(title, author, pages, isRead));
 }
 
-function createForm() {
-    const main = document.querySelector(".main");
-    const form = document.createElement("form");
-    form.classList.add('book-form');
-    form.innerHTML = `
-    <label for="add-book-title">Title: </label>
-    <input id="add-book-title" type="text" name="add-book-title">
-    <label for="add-book-author">Author: </label>
-    <input id="add-book-author" type="text">
-    <label for="add-book-pages">Number of Pages: </label>
-    <input id="add-book-pages" type="text">
-    <label>Have you read this book?</label>
-    <div class="add-book-read">
-        <input id="add-book-read-yes" type="radio" name="read" value="yes">
-        <label for="add-book-read-yes">Yes</label>
-        <input id="add-book-pages-no" type="radio" name="read" value="no">
-        <label for="add-book-read-no">No</label> 
-    </div>
-    <input id="submit-book" type="submit" value="Add Book">
-    `;
-    const submit = form.querySelector("#submit-book");
-    main.appendChild(form);
-    submit.addEventListener("click", () => {
-        const title = form.querySelector("#add-book-title").value;
-        const author = form.querySelector("#add-book-author").value;
-        const pages = form.querySelector("#add-book-pages").value;
-        const isReadChoice = form.querySelector('input[name="read"]:checked').value;
-        let isRead = false;
-        if (isReadChoice === "yes") {
-            isRead = true;
-        }
-        myLibrary.push(new Book(title, author, pages, isRead));
-        console.log(myLibrary);
-        main.removeChild(form);
-        render();
-    });
+function openForm() {
+    const form = document.querySelector("form");
+    form.style.display = "flex";
+}
+
+function resetFormValues(form) {
+    form.querySelector("#add-book-title").value = "";
+    form.querySelector("#add-book-author").value = "";
+    form.querySelector("#add-book-pages").value = "";
 }
 
 
@@ -103,7 +88,11 @@ function addTextElements(card, book) {
     const pages = document.createElement("h3");
     pages.textContent = book.pages;
     const isRead = document.createElement("h3");
-    isRead.textContent = book.isRead;
+    if (book.isRead) {
+        isRead.textContent = "Finished";
+    } else {
+        isRead.textContent = "Not finished";
+    }
     card.appendChild(title);
     card.appendChild(author);
     card.appendChild(pages);
@@ -140,8 +129,15 @@ function addReadButton(element, book) {
 }
 
 render();
+const submit = document.querySelector("#submit-book");
+submit.addEventListener("click", () => {
+    const form = document.querySelector("form");
+    addBookToLibrary();
+    resetFormValues(form);
+    form.style.display = "none";
+    render();
+});
 let addBookButton = document.querySelector(".add-book");
 addBookButton.addEventListener("click", () => {
-    addBookToLibrary();
-    render();
+    openForm();
 });
